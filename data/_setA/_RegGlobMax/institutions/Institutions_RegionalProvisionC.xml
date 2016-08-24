@@ -1,0 +1,5 @@
+<institution class="org.volante.abm.institutions.RegionalProvisionInstitution" id="RegProvInst">
+	<btLabel>RegProvInstBT</btLabel>
+	<actionRuntime>${@(Runs.csv, RegionalInstActionRT)}</actionRuntime>
+	<tickChecker class="org.volante.abm.institutions.global.GlobalSubsidisingInstitution$EvenTickChecker"/>
+</institution>

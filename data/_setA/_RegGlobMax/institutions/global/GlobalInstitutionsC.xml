@@ -1,0 +1,8 @@
+<globalInstitutions>
+	<globalInstitution class="org.volante.abm.institutions.global.GlobalSubsidisingInstitution" 
+						id="GlobalSubsidisingInst">
+		<btLabel>CognitiveGlobalInst</btLabel>
+		<actionRuntime>${@(Runs.csv, GlobalInstActionRT)}</actionRuntime>
+		<tickChecker class="org.volante.abm.institutions.global.GlobalSubsidisingInstitution$OddTickChecker"/>
+	</globalInstitution>
+</globalInstitutions>

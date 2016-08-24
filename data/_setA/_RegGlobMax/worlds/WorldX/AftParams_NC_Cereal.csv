@@ -1,0 +1,3 @@
+"aftParamId","givingIn","givingInDistributionMean","givingInDistributionSD","givingUp","givingUpDistributionMean","givingUpDistributionSD","serviceLevelNoiseMin","serviceLevelNoiseMax","productionCsvFile","givingUpProb"
+0,1,1,0.3,0,0,0.3,0,0.1,"../_BLwX//production/NC_Cereal/AftProduction_NC_Cereal_mono_medium.csv",0.2
+1,1,1,0.3,-0.2,0,0.3,0,0.1,"../_BLwX//production/NC_Cereal/AftProduction_NC_Cereal_mono_medium.csv",0.2

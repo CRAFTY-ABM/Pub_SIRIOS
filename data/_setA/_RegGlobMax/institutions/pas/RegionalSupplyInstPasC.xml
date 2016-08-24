@@ -1,0 +1,35 @@
+<LBoFactoryList>
+	<bofactory class="org.volante.abm.netsens.institutions.pas.RegionalSubsidyPa$RegionalSubsidyPaFactory">
+		<key>RegionalSubsidyPa_CCereal</key>
+		<preferenceUtilities>
+			<utility pref="CostEfficiency">0.5</utility>
+			<utility pref="RegionalDemandMatching">1.0</utility>
+			<utility pref="SocialApproval">0.5</utility>
+		</preferenceUtilities>
+		<agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		<subsidisedFr>C_Cereal</subsidisedFr>
+		<serviceSubsidyFactor service="Cereal">1.5</serviceSubsidyFactor>
+	</bofactory>
+	
+	<bofactory class="org.volante.abm.netsens.institutions.pas.RegionalSubsidyPa$RegionalSubsidyPaFactory">
+		<key>RegionalSubsidyPa_Forester</key>
+		<preferenceUtilities>
+			<utility pref="CostEfficiency">0.5</utility>
+			<utility pref="RegionalDemandMatching">1.0</utility>
+			<utility pref="SocialApproval">0.5</utility>
+		</preferenceUtilities>
+		<agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		<subsidisedFr>Forester</subsidisedFr>
+		<serviceSubsidyFactor service="Timber">1.7</serviceSubsidyFactor>
+	</bofactory>
+	
+	<bofactory class="org.volante.abm.netsens.institutions.pas.RegionalSubsidyPa$RegionalSubsidyPaFactory">
+		 <key>DoNothing</key>
+		 <preferenceUtilities>
+			 <utility pref="CostEfficiency">1.0</utility>
+			 <utility pref="RegionalDemandMatching">0.0</utility>
+			 <utility pref="SocialApproval">0.3</utility>
+		 </preferenceUtilities>
+		 <agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+	</bofactory>
+</LBoFactoryList>

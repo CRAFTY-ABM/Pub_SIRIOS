@@ -1,0 +1,29 @@
+<institution class="org.volante.abm.convis.social.GivingInThresholdInstitution">
+	<innovationReleaseTick>2012</innovationReleaseTick>
+	<initialAwarenessProb>1.0</initialAwarenessProb>
+	<normaliseGI>false</normaliseGI>
+	
+	<innovation class="org.volante.abm.convis.social.SocialProximityGiInnovation" id="GiProximityAdoption">
+		<affectiveRadius>10.0</affectiveRadius>
+		<affectedAFTs>all</affectedAFTs>
+		<updateAverageNeighbourProportion>false</updateAverageNeighbourProportion>
+		<adoptionFactor>1.0</adoptionFactor>
+			<proximitySensitivity aft="C_Cereal">0.2</proximitySensitivity>
+			<proximitySensitivity aft="NC_Cereal">0.9</proximitySensitivity>
+			<proximitySensitivity aft="C_Livestock">0.2</proximitySensitivity>
+			<proximitySensitivity aft="NC_Livestock">0.9</proximitySensitivity>
+			<proximitySensitivity aft="Forester">0.9</proximitySensitivity>
+			<proximitySensitivity aft="Conservationist">0.9</proximitySensitivity>
+			<proximitySensitivity aft="BiofuelFarmer">0.2</proximitySensitivity>
+
+			<thresholdRate aft="C_Cereal">1.0</thresholdRate>
+			<thresholdRate aft="NC_Cereal">1.0</thresholdRate>
+			<thresholdRate aft="C_Livestock">1.0</thresholdRate>
+			<thresholdRate aft="NC_Livestock">1.0</thresholdRate>
+			<thresholdRate aft="Forester">1.0</thresholdRate>
+			<thresholdRate aft="Conservationist">1.0</thresholdRate>
+			<thresholdRate aft="BiofuelFarmer">1.0</thresholdRate>			
+
+		<affectiveAFTs>all</affectiveAFTs>
+	</innovation>
+</institution>

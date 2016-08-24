@@ -1,0 +1,11 @@
+<preferenceList class="de.cesr.lara.toolbox.config.xml.LXmlPreferenceLoader">
+	<preference>Competitiveness</preference>
+	<preference>NeighbourApproval</preference>
+	<preference>SocialApproval</preference>
+	
+	<preference>CostEfficiency</preference>
+	<preference>GlobalDemandMatching</preference>
+	<preference>RegionalDemandMatching</preference>
+	<preference>LUConnectivity</preference>
+	<preference>SupportNoncommercials</preference>
+</preferenceList>

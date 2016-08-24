@@ -1,0 +1,34 @@
+<LBoFactoryList>
+	<bofactory class="org.volante.abm.netsens.institutions.pas.RestrictLandUsePa$RestrictLandUsePaFactory"
+		relevantFrPattern="NC_.*">
+		 <key>RestrictLandUse_NC</key>
+		 <preferenceUtilities>
+			 <utility pref="Costefficiency">1.0</utility>
+			 <utility pref="Demandmatching">0.0</utility>
+			 <utility pref="SocialApproval">0.3</utility>
+			 <utility pref="LUConnectivity">1.0</utility>
+		 </preferenceUtilities>
+		 <agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+	</bofactory>
+	<bofactory class="org.volante.abm.netsens.institutions.pas.RestrictLandUsePa$RestrictLandUsePaFactory"
+		relevantFrPattern="C_.*">
+		 <key>RestrictLandUse_C</key>
+		 <preferenceUtilities>
+			 <utility pref="Costefficiency">0.8</utility>
+			 <utility pref="Demandmatching">-0.5</utility>
+			 <utility pref="SocialApproval">0.5</utility>
+			 <utility pref="LUConnectivity">1.0</utility>
+		 </preferenceUtilities>
+		 <agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+	</bofactory>
+	<bofactory classname="org.volante.abm.netsens.institutions.pas.PseudoPa">
+		 <key>DoNothing</key>
+		 <preferenceUtilities>
+			 <utility pref="Costefficiency">1.0</utility>
+			 <utility pref="Demandmatching">0.0</utility>
+			 <utility pref="SocialApproval">0.7</utility>
+			 <utility pref="LUConnectivity">0.0</utility>
+		 </preferenceUtilities>
+		 <agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+	</bofactory>
+</LBoFactoryList>

@@ -1,0 +1,6 @@
+<world idColumn="ID" competitionColumn="Competition" allocationColumn="Allocation" demandColumn="Demand"
+	 btColumn = "Behavioural Types" frColumn="Functional Roles" cellColumn="Cell Initialisers"  
+	 institutionsColumn="Institutions" agentColumn="Agent Initialisers"
+	 laraModelColumn="LARA Model" socNetColumn="SocialNetwork">
+	<regionCSV>@@(../worlds/EU28/regionalisations/26.csv; RegionCsvFile)</regionCSV>
+</world>

@@ -1,0 +1,2 @@
+<demand class="org.volante.abm.example.MultiRegionSingleMarketDemandModel" 
+demandCSV="${@@(../worlds/%w/regionalisations/%k/%s; DemandFolder)}/%k_%s_demands_%r.csv"/>

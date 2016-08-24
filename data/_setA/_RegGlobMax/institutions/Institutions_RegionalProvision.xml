@@ -1,0 +1,4 @@
+<institution class="org.volante.abm.institutions.RegionalProvisionInstitution" id="RegProvInst">
+	<btLabel>RegProvInstBT</btLabel>
+	<actionRuntime>999</actionRuntime>
+</institution>

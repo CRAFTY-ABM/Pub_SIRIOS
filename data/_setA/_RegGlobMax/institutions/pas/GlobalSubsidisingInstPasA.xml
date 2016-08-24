@@ -1,0 +1,35 @@
+<LBoFactoryList>
+	<bofactory class="org.volante.abm.institutions.pa.GlobalSubsidyPa$GlobalSubsidyPaFactory">
+		<key>GlobalSubsidyPa_CCereal</key>
+		<preferenceUtilities>
+			<utility pref="CostEfficiency">0.5</utility>
+			<utility pref="GlobalDemandMatching">1.0</utility>
+			<utility pref="SocialApproval">0.5</utility>
+		</preferenceUtilities>
+		<agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		<subsidisedFr>C_Cereal</subsidisedFr>
+		<serviceSubsidyFactor service="Cereal">0.5</serviceSubsidyFactor>
+	</bofactory>
+	<bofactory class="org.volante.abm.institutions.pa.GlobalSubsidyPa$GlobalSubsidyPaFactory">
+		<key>GlobalSubsidyPa_CLivestock</key>
+		<preferenceUtilities>
+			<utility pref="CostEfficiency">0.5</utility>
+			<utility pref="GlobalDemandMatching">1.0</utility>
+			<utility pref="SocialApproval">0.5</utility>
+		</preferenceUtilities>
+		<agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		<subsidisedFr>C_Livestock</subsidisedFr>
+		<serviceSubsidyFactor service="Meat">0.5</serviceSubsidyFactor>
+	</bofactory>
+	<bofactory class="org.volante.abm.institutions.pa.GlobalSubsidyPa$GlobalSubsidyPaFactory">
+		<key>GlobalSubsidyPa_Forester</key>
+		<preferenceUtilities>
+			<utility pref="CostEfficiency">0.5</utility>
+			<utility pref="GlobalDemandMatching">1.0</utility>
+			<utility pref="SocialApproval">0.5</utility>
+		</preferenceUtilities>
+		<agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		<subsidisedFr>Forester</subsidisedFr>
+		<serviceSubsidyFactor service="Timber">${@(Runs.csv, FactorTimberGlobal)}</serviceSubsidyFactor>
+	</bofactory>
+</LBoFactoryList>
