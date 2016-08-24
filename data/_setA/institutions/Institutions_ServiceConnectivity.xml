@@ -1,0 +1,10 @@
+<institution class="org.volante.abm.netsens.institutions.ConnectivityInstitution" id="ConnectInst-C_Cereal">
+	<btLabel>SCInstitution</btLabel>
+	<focalFrLabel>C_Cereal</focalFrLabel>
+	<restrictionProbability>1.0</restrictionProbability>
+</institution>
+<institution class="org.volante.abm.netsens.institutions.ConnectivityInstitution" id="ConnectInst-NC_Cereal">
+	<btLabel>SCInstitution</btLabel>
+	<focalFrLabel>NC_Cereal</focalFrLabel>
+	<restrictionProbability>1.0</restrictionProbability>
+</institution>

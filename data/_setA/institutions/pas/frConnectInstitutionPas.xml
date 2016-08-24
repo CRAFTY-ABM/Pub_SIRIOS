@@ -1,0 +1,49 @@
+<LBoFactoryList>
+	<bofactory class="org.volante.abm.netsens.institutions.pas.RestrictLandUsePa$RestrictLandUsePaFactory">
+		 <key>RestrictLandUse_NC</key>
+		 <preferenceUtilities>
+			 <utility pref="Costefficiency">1.0</utility>
+			 <utility pref="Demandmatching">0.0</utility>
+			 <utility pref="SocialApproval">0.3</utility>
+			 <utility pref="LUConnectivity">1.0</utility>
+		 </preferenceUtilities>
+		 <agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		 <relevantFrSet fr="NC_Cereal">
+		 	<list>
+			 	<listentry>NC_Cereal</listentry>
+			 	<listentry>NC_Livestock</listentry>
+		 	</list>
+		 </relevantFrSet>
+		 <relevantFrSet fr="NC_Livestock">
+		 	<list>
+			 	<listentry>NC_Cereal</listentry>
+			 	<listentry>NC_Livestock</listentry>
+			 </list>
+		 </relevantFrSet>
+	</bofactory>
+	<bofactory class="org.volante.abm.netsens.institutions.pas.RestrictLandUsePa$RestrictLandUsePaFactory">
+		 <key>RestrictLandUse_C_Cereal</key>
+		 <preferenceUtilities>
+			 <utility pref="Costefficiency">0.8</utility>
+			 <utility pref="Demandmatching">0.0</utility>
+			 <utility pref="SocialApproval">0.4</utility>
+			 <utility pref="LUConnectivity">1.0</utility>
+		 </preferenceUtilities>
+		 <agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		 <relevantFrSet fr="NC_Cereal">
+		 	<list>
+		 		<listentry>NC_Cereal</listentry>
+		 	</list>
+		 </relevantFrSet>
+	</bofactory>
+	<bofactory classname="org.volante.abm.netsens.institutions.pas.RestrictLandUsePa$RestrictLandUsePaFactory">
+		 <key>DoNothing</key>
+		 <preferenceUtilities>
+			 <utility pref="Costefficiency">1.0</utility>
+			 <utility pref="Demandmatching">0.0</utility>
+			 <utility pref="SocialApproval">0.7</utility>
+			 <utility pref="LUConnectivity">0.0</utility>
+		 </preferenceUtilities>
+		 <agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+	</bofactory>
+</LBoFactoryList>

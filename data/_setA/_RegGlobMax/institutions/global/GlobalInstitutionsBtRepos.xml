@@ -1,0 +1,8 @@
+<GlobalBtRepository class="org.volante.abm.example.GlobalBtRepository">
+	<btFile>${@(Runs.csv, GlobalInstBT)}</btFile>
+	
+	<Boolean param="de.cesr.lara.components.param.LBasicPa:EVENTBUS_FORCE_SEQUENTIAL">true</Boolean>
+	<String param="de.cesr.lara.toolbox.param.LXmlConfigPa:XML_PATH_PREFERENCES">${@(Runs.csv, pathToData)}/_setA/lara/LaraPreferences.xml</String>
+	<String param="de.cesr.lara.toolbox.param.LXmlConfigPa:XML_PATH_DCONFIG">${@(Runs.csv, pathToData)}/_setA/lara/LaraDecisionConfigurations.xml</String>
+	<Integer param="de.cesr.lara.components.param.LDecisionMakingPa:HABIT_THRESHOLD">1</Integer>
+</GlobalBtRepository>

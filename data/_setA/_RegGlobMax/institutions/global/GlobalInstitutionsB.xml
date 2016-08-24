@@ -1,0 +1,7 @@
+<globalInstitutions>
+	<globalInstitution class="org.volante.abm.institutions.global.GlobalSubsidisingInstitution" 
+						id="GlobalSubsidisingInst">
+		<btLabel>CognitiveGlobalInst</btLabel>
+		<actionRuntime>${@(Runs.csv, GlobalInstActionRT)}</actionRuntime>
+	</globalInstitution>
+</globalInstitutions>

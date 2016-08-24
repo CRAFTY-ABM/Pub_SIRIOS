@@ -1,0 +1,57 @@
+<bTypes>
+	<bType label="CognitiveGlobalInst" serialID="10" class="org.volante.abm.agent.bt.CognitiveBT">
+		<triggers>
+			<trigger class="org.volante.abm.decision.trigger.UnmetDemandDT" id="UnmetDemandMeat">
+				<consideredService>Timber</consideredService>
+				<thresholdFraction>${@(Runs.csv, ThresholdTimber)}</thresholdFraction>
+				<dcId>GlobalInstitutionalAction</dcId>
+				<startTick>2011</startTick>
+			</trigger>
+			<trigger class="org.volante.abm.decision.trigger.UnmetDemandDT" id="UnmetDemandCereal">
+				<consideredService>Cereal</consideredService>
+				<dcId>GlobalInstitutionalAction</dcId>
+				<startTick>2011</startTick>
+			</trigger>	
+		</triggers>
+		
+		<laraAgentConfigurator class="org.volante.abm.lara.CobraLaraXmlAgentConfigurator">
+			<bofile>./institutions/pas/GlobalSubsidisingInstPasA.xml</bofile>
+			
+			<preferenceWeight pref="CostEfficiency">1.0</preferenceWeight>
+			<preferenceWeight pref="GlobalDemandMatching">1.0</preferenceWeight>
+			<preferenceWeight pref="SocialApproval">0.8</preferenceWeight>
+			
+			<preprocessorConfigurator>
+				<selectorEntry>
+					<dConfig>GlobalInstitutionalAction</dConfig>
+					<selector class="de.cesr.lara.components.preprocessor.impl.LDeliberativeDecisionModeSelector">
+					</selector>
+				</selectorEntry>
+
+				<collectorEntry>
+					<dConfig>GlobalInstitutionalAction</dConfig>
+					<collector class="de.cesr.lara.components.preprocessor.impl.LContributingBoCollector">
+					</collector>
+				</collectorEntry>				
+				
+				<checkerEntry>
+					<dConfig></dConfig>
+					<checker class="de.cesr.lara.components.preprocessor.impl.LDelegatingBoPreselector">
+					</checker>
+				</checkerEntry>
+				
+				<boUpdaterEntry>
+					<dConfig></dConfig>
+					<updater class="de.cesr.lara.components.preprocessor.impl.LDefaultBOUpdater">
+					</updater>
+				</boUpdaterEntry>
+				
+				<prefUpdaterEntry>
+					<dConfig></dConfig>
+					<updater class="de.cesr.lara.components.preprocessor.impl.LPseudoPrefereceUpdater">
+					</updater>
+				</prefUpdaterEntry>
+			</preprocessorConfigurator>
+		</laraAgentConfigurator>
+	</bType>
+</bTypes>

@@ -1,0 +1,5 @@
+<institution class="org.volante.abm.netsens.institutions.FrConnectivityInstitution" id="FrConnectInst">
+	<btLabel>FrConnectInst</btLabel>
+	<restrictionProbability>1.0</restrictionProbability>
+	<similarNeighboursRequired>3</similarNeighboursRequired>
+</institution>

@@ -1,0 +1,4 @@
+<bTypes>
+	<bType label="Pseudo" serialID="1" class="org.volante.abm.agent.bt.PseudoBT">
+	</bType>
+</bTypes>

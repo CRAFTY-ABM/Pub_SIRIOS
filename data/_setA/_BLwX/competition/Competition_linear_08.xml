@@ -1,0 +1,14 @@
+<competition class="org.volante.abm.example.NormalisedCurveCompetitivenessModel">
+	<curve service="Meat">
+		<curve class="com.moseph.modelutils.curve.LinearFunction" a="0.014" b="2.21" />
+	</curve>
+	<curve service="Cereal">
+		<curve class="com.moseph.modelutils.curve.LinearFunction" a="0.025" b="1.23" />
+	</curve>
+	<curve service="Recreation">
+		<curve class="com.moseph.modelutils.curve.LinearFunction" a="0" b="0" />
+	</curve>
+	<curve service="Timber">
+		<curve class="com.moseph.modelutils.curve.LinearFunction" a="0.0" b="0.15" />
+	</curve>
+</competition>

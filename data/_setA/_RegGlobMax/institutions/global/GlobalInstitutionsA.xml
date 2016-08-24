@@ -1,0 +1,7 @@
+<globalInstitutions>
+	<globalInstitution class="org.volante.abm.institutions.global.GlobalSubsidisingInstitution" 
+						id="GlobalSubsidisingInst">
+		<btLabel>CognitiveGlobalInst</btLabel>
+		<actionRuntime>999</actionRuntime>
+	</globalInstitution>
+</globalInstitutions>

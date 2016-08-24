@@ -1,0 +1,2 @@
+<demand class="org.volante.abm.example.MultiRegionSingleMarketDemandModel" 
+demandCSV="${@(Runs.csv, DemandFolder)}/%k_%s_demands_%r.csv"/>

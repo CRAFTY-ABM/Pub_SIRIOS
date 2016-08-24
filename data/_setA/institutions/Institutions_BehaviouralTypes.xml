@@ -1,0 +1,60 @@
+<bTypes>
+	<bType label="FrConnectInst" serialID="11" class="org.volante.abm.agent.bt.CognitiveBT">
+		<triggers>
+			<trigger class="org.volante.abm.netsens.institutions.SimilarConnectivityTrigger" 
+				id="SimilarConnectTriggerNC">
+				<dcId>RegionalInstitutionalAction</dcId>
+				<similarFrLabel>NC_Livestock</similarFrLabel>
+				<similarFrLabel>NC_Cereal</similarFrLabel>
+			</trigger>
+			<trigger class="org.volante.abm.netsens.institutions.SimilarConnectivityTrigger" 
+				id="SimilarConnectTriggerForest">
+				<dcId>RegionalInstitutionalAction</dcId>
+				<similarFrLabel>Forester</similarFrLabel>
+			</trigger>
+		</triggers>
+		
+		<agentProperty name="CONNECTIVITY_THRESHOLD">0.5</agentProperty>
+		
+		<laraAgentConfigurator class="de.cesr.lara.toolbox.config.xml.LXmlAgentConfigurator">
+			<bofile>${@(Runs.csv, pathToData)}/_setA/lara/pas/frConnectInstitutionPas.xml</bofile>
+			
+			<preferenceWeight pref="Costefficiency">1.0</preferenceWeight>
+			<preferenceWeight pref="Demandmatching">0.5</preferenceWeight>
+			<preferenceWeight pref="LUConnectivity">1.0</preferenceWeight>
+			<preferenceWeight pref="SocialApproval">0.8</preferenceWeight>
+			
+			<preprocessorConfigurator>
+				<selectorEntry>
+					<dConfig>RegionalInstitutionalAction</dConfig>
+					<selector class="de.cesr.lara.components.preprocessor.impl.LDeliberativeDecisionModeSelector">
+					</selector>
+				</selectorEntry>
+
+				<collectorEntry>
+					<dConfig>RegionalInstitutionalAction</dConfig>
+					<collector class="de.cesr.lara.components.preprocessor.impl.LContributingBoCollector">
+					</collector>
+				</collectorEntry>				
+				
+				<checkerEntry>
+					<dConfig></dConfig>
+					<checker class="de.cesr.lara.components.preprocessor.impl.LDelegatingBoPreselector">
+					</checker>
+				</checkerEntry>
+				
+				<boUpdaterEntry>
+					<dConfig></dConfig>
+					<updater class="de.cesr.lara.components.preprocessor.impl.LDefaultBOUpdater">
+					</updater>
+				</boUpdaterEntry>
+				
+				<prefUpdaterEntry>
+					<dConfig></dConfig>
+					<updater class="de.cesr.lara.components.preprocessor.impl.LPseudoPrefereceUpdater">
+					</updater>
+				</prefUpdaterEntry>
+			</preprocessorConfigurator>
+		</laraAgentConfigurator>
+	</bType>
+</bTypes>

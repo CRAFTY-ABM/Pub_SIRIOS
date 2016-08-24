@@ -1,0 +1,33 @@
+<decisonConfigurations>
+	<dConfig>
+		<id>FrSelection</id>
+		<preference>Competitiveness</preference>
+		<preference>NeighbourApproval</preference>
+		<preference>SocialApproval</preference>
+		<singleSelectedBoExpected>true</singleSelectedBoExpected>
+	</dConfig>
+	<dConfig>
+		<id>InnovationAdoption</id>
+		<preference>Competitiveness</preference>
+		<preference>SocialApproval</preference>
+		<singleSelectedBoExpected>true</singleSelectedBoExpected>
+	</dConfig>
+	
+	<dConfig>
+		<id>GlobalInstitutionalAction</id>
+		<preference>CostEfficiency</preference>
+		<preference>GlobalDemandMatching</preference>
+		<preference>LUConnectivity</preference>
+		<preference>SupportNoncommercials</preference>
+		<preference>SocialApproval</preference>
+		<singleSelectedBoExpected>true</singleSelectedBoExpected>
+	</dConfig>
+	<dConfig>
+		<id>RegionalInstitutionalAction</id>
+		<preference>CostEfficiency</preference>
+		<preference>RegionalDemandMatching</preference>
+		<preference>SupportNoncommercials</preference>
+		<preference>SocialApproval</preference>
+		<singleSelectedBoExpected>true</singleSelectedBoExpected>
+	</dConfig>
+</decisonConfigurations>
