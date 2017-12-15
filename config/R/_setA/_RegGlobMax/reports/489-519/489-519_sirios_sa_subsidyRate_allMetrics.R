@@ -20,29 +20,58 @@ setwd(paste(simp$dirs$simp, simp$sim$folder, "cluster/common", sep="/"))
 # usually, the setting/scenario specific simp.R is two levels above:
 source("../../simp.R")
 
-metriccolnames = c("VarChangesLu", "VarChangesCells",
-		"MaxOverSupply", "UnderSupply_Cereal", "UnderSupply_Meat",
-		"RegUnderSupply_Cereal", "OverSupply_Cereal",
-		"ConsProp_NC", "ConsConnectivity", "NumActions"
-		#, "DivSupplyAcrossRegSimpson"
-		# "MaxUnderSupply",  "UnderSupply_Timber", "ConsPatches_NC", 
-		#"DivLuPerRegSimpson", "DivSupplyPerRegSimpson", "NumActionsNC")
+# sort(unique(as.character(colnames(data_agg))))
+
+metrics = matrix(c(
+		1, "ConsConnectivity",
+		#1, "ConsPatches_C",
+		#1, "ConsPatches_NC",
+		1, "ConsProp_C",
+		1, "ConsProp_NC",
+		2, "DivLuPerRegSimpson",
+		2, "DivLuShannon",
+		2, "DivSupplyAcrossRegSimpson",
+		2, "DivSupplyPerRegSimpson",
+		2, "EffSupply",
+		1, "MaxOverSupply",
+		2, "MaxUnderSupply",  
+		3, "NumActions",
+		2, "NumActionsNC",
+		3, "OverSupply_Cereal",
+		3, "OverSupply_Meat",
+		3, "OverSupply_Timber",
+		3, "OverSupply_Total",
+		3,"RegUnderSupply_Cereal",
+		3,"RegUnderSupply_Meat",
+		3,"RegUnderSupply_Timber",
+		4,"UnderSupply_Cereal",
+		4,"UnderSupply_Meat",
+		4,"UnderSupply_Timber",
+		4,"UnderSupply_Total",
+		4, "VarChangesLu",
+		4, "VarChangesCells"), ncol=2, byrow = T
 )
 
-setBmetrics <- c("VarChangesLu", "MaxOverSupply", "OverSupply_Cereal",
-				"NumActions")
-		
-simp$sim$scenario				<- "A1"
+set1metrics <- metrics[metrics[,1]=="1",2]
+set2metrics <- metrics[metrics[,1]=="2",2]
+set3metrics <- metrics[metrics[,1]=="3",2]
+set4metrics <- metrics[metrics[,1]=="4",2]
 
-runs = 229:239
-rseeds = 0:9 #29
+metriccolnames <- metrics[,2]
+
+simp$sim$scenario				<- "B1"
+
+runs = c(489:519)
+
 
 setsimp <- simp
-setsimp$sim$id <- "set229-239Extended2Mean4allCI"
+setsimp$sim$id <- "set489-519"
 
-simp$fig$height <- 700
-simp$fig$width <- 1000
+simp$fig$height <- 1200
+simp$fig$width <- 1500
 simp$fig$linewidth 	<- 1
+
+rseeds = c(0:19)
 
 ############### END of Parameter Section ######################
 
@@ -96,13 +125,13 @@ data_agg <- plyr::ddply(data, c("SubsidyRate","Rseed"), function(data_metrics) d
 		ConsConnectivity= mean(data_metrics[data_metrics$Metric == "ConsConnectivity_NC_Cereal-NC_Livestock", "Value"]),
 		
 		# correct under/oversupply data:
-		UnderSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Total", "Value"])-100),  
-		UnderSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Meat", "Value"])-100),     
-		UnderSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Cereal", "Value"])-100),
+		UnderSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Total", "Value"])-100),  
+		UnderSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Meat", "Value"])-100),     
+		UnderSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Cereal", "Value"])-100),
 		
-		OverSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Total", "Value"])-100),  
-		OverSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Meat", "Value"])-100),     
-		OverSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Timber", "Value"])-100),
+		OverSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Total", "Value"])-100),  
+		OverSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Meat", "Value"])-100),     
+		OverSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Timber", "Value"])-100),
 		
 		RegUnderSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "RegionalUnderSupplyPercent_Cereal", "Value"])-100),
 		RegUnderSupply_Meat = abs(mean(data_metrics[data_metrics$Metric == "RegionalUnderSupplyPercent_Meat", "Value"])-100),
@@ -118,17 +147,17 @@ data_agg <- plyr::ddply(data, c("SubsidyRate","Rseed"), function(data_metrics) d
 		MaxOverSupply  	= max(0, data_metrics[data_metrics$Metric == "MaxOverSupply_Cereal-Meat-Timber", "Value"]),
 		MaxUnderSupply  = max(0, abs(data_metrics[data_metrics$Metric == "MaxUnderSupply_Cereal-Meat-Timber", "Value"])),
 		
-		OverSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Cereal", "Value"])-100),
-		UnderSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Timber", "Value"])-100),
+		OverSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Cereal", "Value"])-100),
+		UnderSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Timber", "Value"])-100),
 		
 		NumActions		= mean(data_metrics[data_metrics$Metric == "NumActions", "Value"]),
 		NumActionsNC	= mean(data_metrics[data_metrics$Metric == "NumActionsNC", "Value"])
 ))
 
-columns <-  c("UnderSupply_Total", "UnderSupply_Meat", "UnderSupply_Cereal",
+replaceNAcolumns <-  c("UnderSupply_Total", "UnderSupply_Meat", "UnderSupply_Cereal",
 		"OverSupply_Total", "OverSupply_Meat", "OverSupply_Cereal", "OverSupply_Timber",
 		"RegUnderSupply_Timber", "RegUnderSupply_Meat", "RegUnderSupply_Cereal")
-data_agg[,columns] <- apply(data_agg[,columns], 2, function(x){replace(x, is.na(x), 0)})
+data_agg[,replaceNAcolumns] <- apply(data_agg[,replaceNAcolumns], 2, function(x){replace(x, is.na(x), 0)})
 
 
 # devide by means across rseeds:
@@ -145,24 +174,33 @@ data_melted <- reshape2::melt(normd, id.vars = c("SubsidyRate", "Rseed"),
 
 
 data_selected <- data_melted[data_melted$Metric %in% metriccolnames,]
-data_selected$Facet <- "Normalised Set A"
-data_selected[data_selected$Metric %in% setBmetrics, "Facet"] <- "Normalised Set B"
+# data_selected = data_selected[data_selected$Rseed == 0 & data_selected$SubsidyRate == 0,]
 
-metriclabels <-  read.csv(file="../../reports/KeyTranslations_SA_Triggering.csv", header=FALSE, stringsAsFactors = FALSE)
-metriclabels <- setNames(metriclabels[,2], metriclabels[,1])
 
-colours <- RColorBrewer::brewer.pal(length(unique(data_selected[data_selected$Facet == "Normalised Set A","Metric"])), 
-		"Set1")
-colours <- c(colours,colours)
+data_selected$Facet <- paste("Normalised Set", metrics[match(data_selected$Metric, metrics[,2]),1])
 
+#metriclabels <-  read.csv(file="../../reports/KeyTranslations_SA_Triggering.csv", header=FALSE, stringsAsFactors = FALSE)
+#metriclabels <- setNames(metriclabels[,2], metriclabels[,1])
+metriclabels <- sort(setNames(paste(metrics[,1], metrics[,2]), metrics[,2]))
+
+colours <- c(RColorBrewer::brewer.pal(length(set1metrics), "Set1"),
+		RColorBrewer::brewer.pal(length(set2metrics), "Set1"),
+		RColorBrewer::brewer.pal(length(set3metrics), "Set1"),
+		RColorBrewer::brewer.pal(length(set4metrics), "Set1"))
+
+colours <- setNames(colours, c(set1metrics, set2metrics, set3metrics, set4metrics))
+
+data_selected$Metric <- factor(data_selected$Metric, levels = metrics[order(paste(metrics[,1], metrics[,2])),2])
+
+data_selected <- data_selected[order(paste(data_selected$Facet, data_selected$Metric)),]
 visualise_lines(simp, data_selected, x_column = "SubsidyRate", y_column="Value", title = NULL,
-		colour_column = "Metric", colour_legendtitle = "Metric", colour_legenditemnames = metriclabels,
-		facet_column = "Facet", facet_ncol = 1, filename = paste("SA", setsimp$sim$id, 
+		colour_column = "Metric", colour_legendtitle = "Metric", colour_legenditemnames = NULL,
+		facet_column = "Facet", facet_ncol = 1, filename = paste("SA_AllMetrics", setsimp$sim$id, 
 				setsimp$sim$id, sep="_"),
 		alpha = simp$fig$alpha, ggplotaddons = list(
 				ggplot2::guides(fill=FALSE),
 				ggplot2::scale_fill_manual(values=colours),
-				ggplot2::scale_color_manual(values=colours, labels=metriclabels, guide=ggplot2::guide_legend(ncol=2)),
+				ggplot2::scale_color_manual(values=colours, labels=metriclabels, guide=ggplot2::guide_legend(ncol=4)),
 				#viridis::scale_color_viridis(discrete=TRUE, labels=metriclabels, guide=ggplot2::guide_legend(ncol=2)),
 				ggplot2::facet_wrap(as.formula(paste("~",  "Facet")), ncol = 2, scales="free_y"),
 				ggplot2::theme(legend.position = "bottom")), showsd = TRUE,

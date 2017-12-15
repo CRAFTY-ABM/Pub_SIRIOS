@@ -32,13 +32,13 @@ metriccolnames = c("VarChangesLu", "VarChangesCells",
 setBmetrics <- c("VarChangesLu", "MaxOverSupply", "OverSupply_Cereal",
 				"NumActions")
 		
-simp$sim$scenario				<- "A1"
+simp$sim$scenario				<- "B1"
 
-runs = 229:239
-rseeds = 0:9 #29
+runs = c(449:459, 462:467)
+
 
 setsimp <- simp
-setsimp$sim$id <- "set229-239Extended2Mean4allCI"
+setsimp$sim$id <- "set449-459_462-467_30r"
 
 simp$fig$height <- 700
 simp$fig$width <- 1000
@@ -52,6 +52,7 @@ data <- shbasic::sh_tools_loadorsave(SIP = setsimp, OBJECTNAME = "data_metrics",
 		PRODUCTIONFUN = function() { 
 	data <- data.frame()
 	for (run in runs) {
+		rseeds = if(run < 460) 0:9 else c(0:9,20:39)
 		for (rseed in rseeds) {
 			# run = runs[7]; rseed = rseeds[1]
 			
@@ -96,13 +97,13 @@ data_agg <- plyr::ddply(data, c("SubsidyRate","Rseed"), function(data_metrics) d
 		ConsConnectivity= mean(data_metrics[data_metrics$Metric == "ConsConnectivity_NC_Cereal-NC_Livestock", "Value"]),
 		
 		# correct under/oversupply data:
-		UnderSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Total", "Value"])-100),  
-		UnderSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Meat", "Value"])-100),     
-		UnderSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Cereal", "Value"])-100),
+		UnderSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Total", "Value"])-100),  
+		UnderSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Meat", "Value"])-100),     
+		UnderSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Cereal", "Value"])-100),
 		
-		OverSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Total", "Value"])-100),  
-		OverSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Meat", "Value"])-100),     
-		OverSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Timber", "Value"])-100),
+		OverSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Total", "Value"])-100),  
+		OverSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Meat", "Value"])-100),     
+		OverSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Timber", "Value"])-100),
 		
 		RegUnderSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "RegionalUnderSupplyPercent_Cereal", "Value"])-100),
 		RegUnderSupply_Meat = abs(mean(data_metrics[data_metrics$Metric == "RegionalUnderSupplyPercent_Meat", "Value"])-100),
@@ -118,8 +119,8 @@ data_agg <- plyr::ddply(data, c("SubsidyRate","Rseed"), function(data_metrics) d
 		MaxOverSupply  	= max(0, data_metrics[data_metrics$Metric == "MaxOverSupply_Cereal-Meat-Timber", "Value"]),
 		MaxUnderSupply  = max(0, abs(data_metrics[data_metrics$Metric == "MaxUnderSupply_Cereal-Meat-Timber", "Value"])),
 		
-		OverSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Cereal", "Value"])-100),
-		UnderSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Timber", "Value"])-100),
+		OverSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Cereal", "Value"])-100),
+		UnderSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Timber", "Value"])-100),
 		
 		NumActions		= mean(data_metrics[data_metrics$Metric == "NumActions", "Value"]),
 		NumActionsNC	= mean(data_metrics[data_metrics$Metric == "NumActionsNC", "Value"])
@@ -157,7 +158,7 @@ colours <- c(colours,colours)
 
 visualise_lines(simp, data_selected, x_column = "SubsidyRate", y_column="Value", title = NULL,
 		colour_column = "Metric", colour_legendtitle = "Metric", colour_legenditemnames = metriclabels,
-		facet_column = "Facet", facet_ncol = 1, filename = paste("SA", setsimp$sim$id, 
+		facet_column = "Facet", facet_ncol = 1, filename = paste("Bugfix_SA", setsimp$sim$id, 
 				setsimp$sim$id, sep="_"),
 		alpha = simp$fig$alpha, ggplotaddons = list(
 				ggplot2::guides(fill=FALSE),
