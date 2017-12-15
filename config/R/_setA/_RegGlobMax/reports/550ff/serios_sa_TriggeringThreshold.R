@@ -32,13 +32,13 @@ metriccolnames = c("VarChangesLu", "VarChangesCells",
 setBmetrics <- c("VarChangesLu", "MaxOverSupply", "OverSupply_Cereal",
 				"NumActions")
 		
-simp$sim$scenario				<- "A1"
+simp$sim$scenario	<- "A1"
 
-runs = 229:239
-rseeds = 0:9 #29
+runs = 550:574
+rseeds = 0:19
 
 setsimp <- simp
-setsimp$sim$id <- "set229-239Extended2Mean4allCI"
+setsimp$sim$id <- "set550-574"
 
 simp$fig$height <- 700
 simp$fig$width <- 1000
@@ -73,7 +73,7 @@ data <- shbasic::sh_tools_loadorsave(SIP = setsimp, OBJECTNAME = "data_metrics",
 			data_metrics <- rbind(data_metrics, numactions, numactionsNC)
 			
 			runparams <- craftyr::input_csv_param_runs(simp, paramid = TRUE)
-			data_metrics$SubsidiesRate = runparams[,"FactorCerealGlobal"]
+			data_metrics$TriggeringThreshold = runparams[,"ThresholdCerealGlobal"]
 			data_metrics$Rseed <- rseed
 		
 			data <- rbind(data, data_metrics)
@@ -82,10 +82,8 @@ data <- shbasic::sh_tools_loadorsave(SIP = setsimp, OBJECTNAME = "data_metrics",
 	return(data)
 })
 
-colnames(data)[colnames(data) == "SubsidiesRate"] <- "SubsidyRate"
-data_agg <- plyr::ddply(data, c("SubsidyRate","Rseed"), function(data_metrics) data.frame(
+data_agg <- plyr::ddply(data, c("TriggeringThreshold","Rseed"), function(data_metrics) data.frame(
 		
-		# data_metrics = data[data$SubsidyRate == 0.3 & data$Rseed==0,]
 		ConsPatches_NC 	= mean(data_metrics[data_metrics$Metric == "ConsPatches_NC_Cereal-NC_Livestock", "Value"]),
 		
 		VarChangesCells	= sum(data_metrics[data_metrics$Metric == "VarChangesCells", "Value"]),
@@ -132,15 +130,15 @@ data_agg[,columns] <- apply(data_agg[,columns], 2, function(x){replace(x, is.na(
 
 
 # devide by means across rseeds:
-d <- apply(data_agg[, -match(c("SubsidyRate"), colnames(data_agg))], 
+d <- apply(data_agg[, -match(c("TriggeringThreshold"), colnames(data_agg))], 
 		MARGIN=2, FUN = function(x) abs(if (is.na(mean(x[1:length(rseeds)])) || mean(x[1:length(rseeds)]) != 0) 
 								mean(x[1:length(rseeds)]) else max(colMeans(matrix(x, nrow=length(rseeds))))))
-normd <- as.data.frame(t(apply(data_agg[, -match(c("SubsidyRate"), colnames(data_agg))], 
+normd <- as.data.frame(t(apply(data_agg[, -match(c("TriggeringThreshold"), colnames(data_agg))], 
 		MARGIN=1, FUN= function(x) x/d)))
-normd$SubsidyRate <- data_agg$SubsidyRate
+normd$TriggeringThreshold <- data_agg$TriggeringThreshold
 normd$Rseed <- data_agg$Rseed
 
-data_melted <- reshape2::melt(normd, id.vars = c("SubsidyRate", "Rseed"),
+data_melted <- reshape2::melt(normd, id.vars = c("TriggeringThreshold", "Rseed"),
 		variable.name = "Metric",  value.name = "Value")
 
 
@@ -155,7 +153,7 @@ colours <- RColorBrewer::brewer.pal(length(unique(data_selected[data_selected$Fa
 		"Set1")
 colours <- c(colours,colours)
 
-visualise_lines(simp, data_selected, x_column = "SubsidyRate", y_column="Value", title = NULL,
+visualise_lines(simp, data_selected, x_column = "TriggeringThreshold", y_column="Value", title = NULL,
 		colour_column = "Metric", colour_legendtitle = "Metric", colour_legenditemnames = metriclabels,
 		facet_column = "Facet", facet_ncol = 1, filename = paste("SA", setsimp$sim$id, 
 				setsimp$sim$id, sep="_"),

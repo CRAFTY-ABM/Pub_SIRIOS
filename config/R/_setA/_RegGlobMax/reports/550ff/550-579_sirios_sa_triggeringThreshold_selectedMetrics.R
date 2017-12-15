@@ -2,7 +2,7 @@
 # Create Sensitivity Analysis plot for Subsidy rate
 #
 # Project:		Pub_SIRIOS
-# Last update: 	24/08/2016
+# Last update: 	05/12/2017
 # Author: 		Sascha Holzhauer
 # Instructions:	Run maschine-specific SIMP file first (see craftyr documentation)
 ##########################################################################################
@@ -20,25 +20,51 @@ setwd(paste(simp$dirs$simp, simp$sim$folder, "cluster/common", sep="/"))
 # usually, the setting/scenario specific simp.R is two levels above:
 source("../../simp.R")
 
-metriccolnames = c("VarChangesLu", "VarChangesCells",
-		"MaxOverSupply", "UnderSupply_Cereal", "UnderSupply_Meat",
-		"RegUnderSupply_Cereal", "OverSupply_Cereal",
-		"ConsProp_NC", "ConsConnectivity", "NumActions"
-		#, "DivSupplyAcrossRegSimpson"
-		# "MaxUnderSupply",  "UnderSupply_Timber", "ConsPatches_NC", 
-		#"DivLuPerRegSimpson", "DivSupplyPerRegSimpson", "NumActionsNC")
+# sort(unique(as.character(colnames(data_agg))))
+
+metrics = matrix(c(
+		#1, "ConsConnectivity",
+		#1, "ConsPatches_C",
+		#1, "ConsPatches_NC",
+		#1, "ConsProp_C",
+		#1, "ConsProp_NC",
+		#2, "DivLuPerRegSimpson",
+		#2, "DivLuShannon",
+		#2, "DivSupplyAcrossRegSimpson",
+		#2, "DivSupplyPerRegSimpson",
+		#2, "EffSupply",
+		#1, "MaxOverSupply",
+		#2, "MaxUnderSupply",  
+			1, "NumActions",
+		#2, "NumActionsNC",
+		#3, "OverSupply_Cereal",
+		#3, "OverSupply_Meat",
+		#3, "OverSupply_Timber",
+			2,"OverSupply_Total",
+			1,"RegUnderSupply_Cereal",
+			1,"RegUnderSupply_Meat",
+			1,"RegUnderSupply_Timber",
+		#4,"UnderSupply_Cereal",
+			2,"UnderSupply_Meat",
+		#4,"UnderSupply_Timber",
+			2,"UnderSupply_Total",
+			2, "VarChangesLu"
+		#4, "VarChangesCells") 
+	), ncol=2, byrow = T
 )
 
-setBmetrics <- c("VarChangesLu", "MaxOverSupply", "OverSupply_Cereal",
-				"NumActions")
-		
-simp$sim$scenario				<- "A1"
+set1metrics <- metrics[metrics[,1]=="1",2]
+set2metrics <- metrics[metrics[,1]=="2",2]
 
-runs = 229:239
-rseeds = 0:9 #29
+metriccolnames <- metrics[,2]
+
+simp$sim$scenario				<- "B1"
+
+runs = 550:574
+rseeds = 0:19
 
 setsimp <- simp
-setsimp$sim$id <- "set229-239Extended2Mean4allCI"
+setsimp$sim$id <- "set550-574"
 
 simp$fig$height <- 700
 simp$fig$width <- 1000
@@ -73,7 +99,7 @@ data <- shbasic::sh_tools_loadorsave(SIP = setsimp, OBJECTNAME = "data_metrics",
 			data_metrics <- rbind(data_metrics, numactions, numactionsNC)
 			
 			runparams <- craftyr::input_csv_param_runs(simp, paramid = TRUE)
-			data_metrics$SubsidiesRate = runparams[,"FactorCerealGlobal"]
+			data_metrics$TriggeringThreshold = runparams[,"ThresholdCerealGlobal"]
 			data_metrics$Rseed <- rseed
 		
 			data <- rbind(data, data_metrics)
@@ -82,8 +108,7 @@ data <- shbasic::sh_tools_loadorsave(SIP = setsimp, OBJECTNAME = "data_metrics",
 	return(data)
 })
 
-colnames(data)[colnames(data) == "SubsidiesRate"] <- "SubsidyRate"
-data_agg <- plyr::ddply(data, c("SubsidyRate","Rseed"), function(data_metrics) data.frame(
+data_agg <- plyr::ddply(data, c("TriggeringThreshold","Rseed"), function(data_metrics) data.frame(
 		
 		# data_metrics = data[data$SubsidyRate == 0.3 & data$Rseed==0,]
 		ConsPatches_NC 	= mean(data_metrics[data_metrics$Metric == "ConsPatches_NC_Cereal-NC_Livestock", "Value"]),
@@ -96,13 +121,13 @@ data_agg <- plyr::ddply(data, c("SubsidyRate","Rseed"), function(data_metrics) d
 		ConsConnectivity= mean(data_metrics[data_metrics$Metric == "ConsConnectivity_NC_Cereal-NC_Livestock", "Value"]),
 		
 		# correct under/oversupply data:
-		UnderSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Total", "Value"])-100),  
-		UnderSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Meat", "Value"])-100),     
-		UnderSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Cereal", "Value"])-100),
+		UnderSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Total", "Value"])-100),  
+		UnderSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Meat", "Value"])-100),     
+		UnderSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Cereal", "Value"])-100),
 		
-		OverSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Total", "Value"])-100),  
-		OverSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Meat", "Value"])-100),     
-		OverSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Timber", "Value"])-100),
+		OverSupply_Total = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Total", "Value"])-100),  
+		OverSupply_Meat  = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Meat", "Value"])-100),     
+		OverSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Timber", "Value"])-100),
 		
 		RegUnderSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "RegionalUnderSupplyPercent_Cereal", "Value"])-100),
 		RegUnderSupply_Meat = abs(mean(data_metrics[data_metrics$Metric == "RegionalUnderSupplyPercent_Meat", "Value"])-100),
@@ -118,46 +143,53 @@ data_agg <- plyr::ddply(data, c("SubsidyRate","Rseed"), function(data_metrics) d
 		MaxOverSupply  	= max(0, data_metrics[data_metrics$Metric == "MaxOverSupply_Cereal-Meat-Timber", "Value"]),
 		MaxUnderSupply  = max(0, abs(data_metrics[data_metrics$Metric == "MaxUnderSupply_Cereal-Meat-Timber", "Value"])),
 		
-		OverSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "OverSupplyPercent_Cereal", "Value"])-100),
-		UnderSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "UnderSupplyPercent_Timber", "Value"])-100),
+		OverSupply_Cereal = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentOver_Cereal", "Value"])-100),
+		UnderSupply_Timber = abs(mean(data_metrics[data_metrics$Metric == "SupplyPercentUnder_Timber", "Value"])-100),
 		
 		NumActions		= mean(data_metrics[data_metrics$Metric == "NumActions", "Value"]),
 		NumActionsNC	= mean(data_metrics[data_metrics$Metric == "NumActionsNC", "Value"])
 ))
 
-columns <-  c("UnderSupply_Total", "UnderSupply_Meat", "UnderSupply_Cereal",
+replaceNAcolumns <-  c("UnderSupply_Total", "UnderSupply_Meat", "UnderSupply_Cereal",
 		"OverSupply_Total", "OverSupply_Meat", "OverSupply_Cereal", "OverSupply_Timber",
 		"RegUnderSupply_Timber", "RegUnderSupply_Meat", "RegUnderSupply_Cereal")
-data_agg[,columns] <- apply(data_agg[,columns], 2, function(x){replace(x, is.na(x), 0)})
+data_agg[,replaceNAcolumns] <- apply(data_agg[,replaceNAcolumns], 2, function(x){replace(x, is.na(x), 0)})
 
 
 # devide by means across rseeds:
-d <- apply(data_agg[, -match(c("SubsidyRate"), colnames(data_agg))], 
+d <- apply(data_agg[, -match(c("TriggeringThreshold"), colnames(data_agg))], 
 		MARGIN=2, FUN = function(x) abs(if (is.na(mean(x[1:length(rseeds)])) || mean(x[1:length(rseeds)]) != 0) 
 								mean(x[1:length(rseeds)]) else max(colMeans(matrix(x, nrow=length(rseeds))))))
-normd <- as.data.frame(t(apply(data_agg[, -match(c("SubsidyRate"), colnames(data_agg))], 
+normd <- as.data.frame(t(apply(data_agg[, -match(c("TriggeringThreshold"), colnames(data_agg))], 
 		MARGIN=1, FUN= function(x) x/d)))
-normd$SubsidyRate <- data_agg$SubsidyRate
+normd$TriggeringThreshold <- data_agg$TriggeringThreshold
 normd$Rseed <- data_agg$Rseed
 
-data_melted <- reshape2::melt(normd, id.vars = c("SubsidyRate", "Rseed"),
+data_melted <- reshape2::melt(normd, id.vars = c("TriggeringThreshold", "Rseed"),
 		variable.name = "Metric",  value.name = "Value")
 
 
 data_selected <- data_melted[data_melted$Metric %in% metriccolnames,]
-data_selected$Facet <- "Normalised Set A"
-data_selected[data_selected$Metric %in% setBmetrics, "Facet"] <- "Normalised Set B"
+# data_selected = data_selected[data_selected$Rseed == 0 & data_selected$SubsidyRate == 0,]
 
-metriclabels <-  read.csv(file="../../reports/KeyTranslations_SA_Triggering.csv", header=FALSE, stringsAsFactors = FALSE)
-metriclabels <- setNames(metriclabels[,2], metriclabels[,1])
 
-colours <- RColorBrewer::brewer.pal(length(unique(data_selected[data_selected$Facet == "Normalised Set A","Metric"])), 
-		"Set1")
-colours <- c(colours,colours)
+data_selected$Facet <- paste("Normalised Set", metrics[match(data_selected$Metric, metrics[,2]),1])
 
-visualise_lines(simp, data_selected, x_column = "SubsidyRate", y_column="Value", title = NULL,
-		colour_column = "Metric", colour_legendtitle = "Metric", colour_legenditemnames = metriclabels,
-		facet_column = "Facet", facet_ncol = 1, filename = paste("SA", setsimp$sim$id, 
+metriclabels <-  read.csv(file="../../reports/KeyTranslations_SA_TriggeringWoFacet.csv", header=FALSE, stringsAsFactors = FALSE)
+metriclabels <- setNames(paste("(",metrics[match(metriclabels[,1], metrics[,2]),1], ") ", metriclabels[,2], sep=""), metriclabels[,1])
+#metriclabels <- sort(setNames(paste(metrics[,1], metrics[,2]), metrics[,2]))
+
+colours <- c(RColorBrewer::brewer.pal(length(set1metrics), "Set1"),
+		RColorBrewer::brewer.pal(length(set2metrics), "Set1"))
+
+colours <- setNames(colours, c(set1metrics, set2metrics))
+
+data_selected$Metric <- factor(data_selected$Metric, levels = metrics[order(paste(metrics[,1], metrics[,2])),2])
+
+data_selected <- data_selected[order(paste(data_selected$Facet, data_selected$Metric)),]
+visualise_lines(simp, data_selected, x_column = "TriggeringThreshold", y_column="Value", title = NULL,
+		colour_column = "Metric", colour_legendtitle = "Metric", colour_legenditemnames = NULL,
+		facet_column = "Facet", facet_ncol = 1, filename = paste("SA_SelectedMetrics", setsimp$sim$id, 
 				setsimp$sim$id, sep="_"),
 		alpha = simp$fig$alpha, ggplotaddons = list(
 				ggplot2::guides(fill=FALSE),
