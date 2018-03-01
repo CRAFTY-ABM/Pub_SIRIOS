@@ -1,4 +1,4 @@
-<scenario startTick="2010" endTick="2040" world="WorldX" 
+<scenario startTick="2010" endTick="2040" world="WorldX"
 	version="${@(Runs.csv, Version)}"
 	regionalisation = "${@(Runs.csv, Regionalisation)}"
 	scenario="${@(Runs.csv, Scenario)}">
@@ -27,7 +27,7 @@
 		<output class="org.volante.abm.netsens.output.FRConnectivityCSVOutputter" perRegion="true" startYear="2010" everyNYears="1"/>
 		<output class="org.volante.abm.output.TakeoverCellOutputter" perRegion="true" everyNYears="1" filePerTick="false" addRegion="false"/>
 		<output class="org.volante.abm.output.GivingInStatisticsOutputter" startYear="2011" perRegion="true" everyNYears="1" filePerTick="false" addRegion="false"/>
-		<output class="org.volante.abm.output.ActionCSVOutputter" agentpattern=".*Inst" filePerTick="false" perRegion="true" startYear="2010" everyNYears="1">
+		<output class="org.volante.abm.output.ActionCSVOutputter" addGlobalActionsToRegions="true" agentpattern=".*Inst" filePerTick="false" perRegion="true" startYear="2010" everyNYears="1">
 		</output>
 		<output class="org.volante.abm.output.CellTable" filePerTick="false" perRegion="true" addRegion="false" addCellRegion="false" addAgent="false" 
         	addServices="false" addCapitals="false" addCompetitiveness="false" addLandUseIndex="false" addLandUse="false" 

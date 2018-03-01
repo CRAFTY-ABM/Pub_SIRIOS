@@ -16,7 +16,7 @@ import org.volante.abm.decision.pa.CraftyPa;
 import org.volante.abm.decision.pa.PropertyProvidingPa;
 import org.volante.abm.example.CellPropertyIds;
 import org.volante.abm.example.measures.ConnectivityMeasure;
-import org.volante.abm.institutions.AbstractCognitiveInstitution;
+import org.volante.abm.institutions.AbstractCobraInstitution;
 import org.volante.abm.institutions.pa.RestrictLandUsePa;
 import org.volante.abm.output.tablecolumns.RestrictionNumber.RestrictionNumberProperties;
 import org.volante.abm.param.RandomPa;
@@ -38,7 +38,7 @@ import org.volante.abm.param.RandomPa;
  * @author Sascha Holzhauer
  * 
  */
-public class FrConnectivityInstitution extends AbstractCognitiveInstitution {
+public class FrConnectivityInstitution extends AbstractCobraInstitution {
 
 	/**
 	 * Restriction of an FR will take place with this probability (default: 1.0)

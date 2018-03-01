@@ -1,4 +1,2 @@
-:: Pub_SIRIOS v0.2 ::
-- refactoring of metric selection in R figures
-- added R scripts to produce SA (subsidy rate and triggering threshold) and DoE figures
-- added R scripts to compare actions
+:: Pub_SIRIOS v0.4 ::
+- added R scripts for runs 720-824

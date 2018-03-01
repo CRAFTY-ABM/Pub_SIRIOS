@@ -1,0 +1,65 @@
+---
+title: "SI Parameters"
+author: "Sascha Holzhauer"
+date: "`r Sys.Date()`"
+output: word_document
+---
+
+
+```{r, echo=FALSE, warnings=FALSE, message=FALSE, results='hide'}
+source(simp$simpDefinition)
+futile.logger::flog.threshold(futile.logger::ERROR, name='craftyr')
+simp$sim$folder 	<- "_setA/_RegGlobMax"
+setwd(paste(simp$dirs$simp, sep="/"))
+source(paste(simp$dirs$simp, simp$sim$folder, "simp.R", sep="/"))
+
+simp$sim$runids 	<- c(paste(preserve$run, "-0", sep=""))	# run to deal with
+simp$sim$id			<- c(paste(preserve$run, "-0", sep=""))	# ID to identify specific data collections (e.g. regions)
+simp$sim$task		<- c(paste(preserve$run, "-0", sep=""))	# Name of surrounding folder, usually a description of task 
+simp$sim$endtick	<- 2040
+```
+
+## Agent Functional Types (AFT) Production
+```{r, echo=FALSE, warnings=TRUE, message=TRUE, results='asis'}
+
+for (aft in simp$mdata$aftNames[-1]) {
+	data <- input_csv_param_productivities(simp, aft, filenameprefix = "AftProduction_",
+				filenamepostfix = "_mono_medium")
+	cat(paste("  \n###", aft, sep=""))
+	print(knitr::kable(data,  format = "pandoc", 
+		caption= paste("Capital sensitivities and productivities for AFT", aft)))	
+}	
+```
+
+## Agent Functional Types (AFT) Parameters
+```{r, echo=FALSE, warnings=TRUE, message=TRUE, results='asis'}
+data <- hl_printAgentParameters(simp, filenameprefix  = "AftParams_",
+		filenamepostfix = "", returnDataFrame = TRUE)
+colnames(data)[colnames(data)=="serviceLevelNoiseMax"] <- "Noise"
+knitr::kable(data, format = "pandoc", 
+		caption= "AFT parameters. GU is Giving up, GI is giving in.")
+```
+
+## Benefit Functions
+```{r, echo=FALSE, warnings=TRUE, message=TRUE, results='asis'}
+functions <- hl_getCompetitionFunctions(simp, returntext = TRUE)
+knitr::kable(data.frame(Service = names(functions), Function = functions), row.names = FALSE)
+```
+
+## Service Demands
+```{r, echo=FALSE, warnings=TRUE, message=TRUE, results='asis'}
+
+ knitr::kable(hl_table_demand(simp, dataname = "csv_aggregateServiceDemand", latex = FALSE, 
+	forceparam = TRUE, regionset="13"), format = "pandoc",
+caption="Demands for Services per year in region 13. Values for 2010 are chosen to approach the supply of initial land use,
+		and trends resemble those of IPCC scenario B1.")
+		
+knitr::kable(hl_table_demand(simp, dataname = "csv_aggregateServiceDemand", latex = FALSE, 
+	forceparam = TRUE, regionset="14"), format = "pandoc",
+caption="Demands for Services per year in region 14. Values for 2010 are chosen to approach the supply of initial land use,
+		and trends resemble those of IPCC scenario B1.")
+		
+knitr::kable(hl_table_demand(simp, dataname = "csv_aggregateServiceDemand", latex = FALSE, 
+	forceparam = TRUE, regionset="27"), format = "pandoc",
+caption="Demands for Services per year in region 27. Values for 2010 are chosen to approach the supply of initial land use,
+		and trends resemble those of IPCC scenario B1.")

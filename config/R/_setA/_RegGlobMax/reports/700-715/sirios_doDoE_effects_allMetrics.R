@@ -213,12 +213,12 @@ for (set in unique(metrics[,1])) {
 		substitutions <- c(substitutions, "Effect" = "Effect")
 		simp$fig$height			<- 920
 		simp$fig$width			<- 920
-		filename 				<-  paste("crafty_netsens_analysis_doe_effects_600-615_metricFocus_nointeraction", set, sep="_")
+		filename 				<-  paste("crafty_netsens_analysis_doe_effects_700-715_metricFocus_nointeraction", set, sep="_")
 		numcol					<- 2
 	} else {
 		indices <- rep(TRUE, length(rownames(fx)))
 		effectdata <- setNames(fx$effects, rownames(fx))
-		filename 				<-  paste("crafty_netsens_analysis_doe_effects_600-615_metricFocus", set, sep="_")
+		filename 				<-  paste("crafty_netsens_analysis_doe_effects_700-715_metricFocus", set, sep="_")
 		numcol					<-  3
 	}
 	

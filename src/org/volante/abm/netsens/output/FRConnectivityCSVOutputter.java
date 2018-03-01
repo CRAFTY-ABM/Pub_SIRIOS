@@ -53,7 +53,8 @@ public class FRConnectivityCSVOutputter extends AggregateCSVOutputter {
 	}
 
 	/**
-	 * @see org.volante.abm.output.TableOutputter#doOutput(org.volante.abm.data.Regions)
+	 * @see org.volante.abm.serialization.GloballyInitialisable#initialise(org.volante.abm.data.ModelData,
+	 *      org.volante.abm.schedule.RunInfo, org.volante.abm.data.Regions)
 	 */
 	@Override
 	public void doOutput(Regions regions) {

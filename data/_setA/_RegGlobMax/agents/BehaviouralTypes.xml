@@ -121,4 +121,6 @@
 			</preprocessorConfigurator>
 		</laraAgentConfigurator>
 	</bType>
+	<bType label="PseudoBT" serialID="3" class="org.volante.abm.agent.bt.PseudoBT">
+	</bType>
 </bTypes>

@@ -1,0 +1,72 @@
+<LBoFactoryList>
+	<bofactory class="org.volante.abm.institutions.pa.RegionalCompFuncSubsidyPa$RegionalCompFuncSubsidyPaFactory">
+		<key>RegionalCompFuncSubsidyPa_CCereal</key>
+		<preferenceUtilities>
+			<utility pref="CostEfficiency">0.6</utility>
+			<utility pref="RegionalDemandMatching">1.0</utility>
+			<utility pref="SocialApproval">0.4</utility>
+		</preferenceUtilities>
+		<agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		<subsidisedFr>C_Cereal</subsidisedFr>
+		<serviceSubsidyFactor service="Cereal">${@(Runs.csv, FactorCerealRegional)}</serviceSubsidyFactor>
+		<potentialTakeoversWeight>${@(Runs.csv, PACconsiderRegional)}</potentialTakeoversWeight>
+	</bofactory>
+	<bofactory class="org.volante.abm.institutions.pa.RegionalCompFuncSubsidyPa$RegionalCompFuncSubsidyPaFactory">
+		<key>RegionalCompFuncSubsidyPa_NCCereal</key>
+		<preferenceUtilities>
+			<utility pref="CostEfficiency">0.5</utility>
+			<utility pref="RegionalDemandMatching">1.0</utility>
+			<utility pref="SocialApproval">0.6</utility>
+		</preferenceUtilities>
+		<agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		<subsidisedFr>NC_Cereal</subsidisedFr>
+		<serviceSubsidyFactor service="Cereal">${@(Runs.csv, FactorCerealRegional)}</serviceSubsidyFactor>
+		<potentialTakeoversWeight>${@(Runs.csv, PACconsiderRegional)}</potentialTakeoversWeight>
+	</bofactory>
+	<bofactory class="org.volante.abm.institutions.pa.RegionalCompFuncSubsidyPa$RegionalCompFuncSubsidyPaFactory">
+		<key>RegionalCompFuncSubsidyPa_CLivestock</key>
+		<preferenceUtilities>
+			<utility pref="CostEfficiency">0.6</utility>
+			<utility pref="RegionalDemandMatching">1.0</utility>
+			<utility pref="SocialApproval">0.4</utility>
+		</preferenceUtilities>
+		<agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		<subsidisedFr>C_Livestock</subsidisedFr>
+		<serviceSubsidyFactor service="Meat">${@(Runs.csv, FactorMeatRegional)}</serviceSubsidyFactor>
+		<potentialTakeoversWeight>${@(Runs.csv, PACconsiderRegional)}</potentialTakeoversWeight>
+	</bofactory>
+	<bofactory class="org.volante.abm.institutions.pa.RegionalCompFuncSubsidyPa$RegionalCompFuncSubsidyPaFactory">
+		<key>RegionalCompFuncSubsidyPa_NCLivestock</key>
+		<preferenceUtilities>
+			<utility pref="CostEfficiency">0.5</utility>
+			<utility pref="RegionalDemandMatching">1.0</utility>
+			<utility pref="SocialApproval">0.6</utility>
+		</preferenceUtilities>
+		<agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		<subsidisedFr>NC_Livestock</subsidisedFr>
+		<serviceSubsidyFactor service="Meat">${@(Runs.csv, FactorMeatRegional)}</serviceSubsidyFactor>
+		<potentialTakeoversWeight>${@(Runs.csv, PACconsiderRegional)}</potentialTakeoversWeight>
+	</bofactory>
+	<bofactory class="org.volante.abm.institutions.pa.RegionalCompFuncSubsidyPa$RegionalCompFuncSubsidyPaFactory">
+		<key>RegionalCompFuncSubsidyPa_Forester</key>
+		<preferenceUtilities>
+			<utility pref="CostEfficiency">0.6</utility>
+			<utility pref="RegionalDemandMatching">1.0</utility>
+			<utility pref="SocialApproval">0.5</utility>
+		</preferenceUtilities>
+		<agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+		<subsidisedFr>Forester</subsidisedFr>
+		<serviceSubsidyFactor service="Timber">${@(Runs.csv, FactorTimberRegional)}</serviceSubsidyFactor>
+		<potentialTakeoversWeight>${@(Runs.csv, PACconsiderRegional)}</potentialTakeoversWeight>
+	</bofactory>
+	
+	<bofactory class="org.volante.abm.institutions.pa.RegionalCompFuncSubsidyPa$RegionalCompFuncSubsidyPaFactory">
+		 <key>DoNothing</key>
+		 <preferenceUtilities>
+			 <utility pref="CostEfficiency">1.0</utility>
+			 <utility pref="RegionalDemandMatching">0.0</utility>
+			 <utility pref="SocialApproval">0.3</utility>
+		 </preferenceUtilities>
+		 <agentclassname>org.volante.abm.agent.bt.LaraBehaviouralComponent</agentclassname>
+	</bofactory>
+</LBoFactoryList>
