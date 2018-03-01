@@ -1,0 +1,9 @@
+<allocation class="org.volante.abm.example.GiveUpGiveInAllocationModel" 
+	percentageCells="${@(Runs.csv, Allocation_percentageCell)}"
+ 	percentageTakeOvers="${@(Runs.csv, Allocation_percentageTakeovers)}" probabilityExponent="1"
+ 	proportionToAllocate="${@(Runs.csv, allocprob)}">
+ 	<tryToComeInMode>RANDOM_CELL_ORDER</tryToComeInMode>
+ 	<agentFinder class="org.volante.abm.agent.assembler.DefaultSocialAgentAssembler">
+		<defaultBtId>3</defaultBtId>
+	</agentFinder>
+ </allocation>

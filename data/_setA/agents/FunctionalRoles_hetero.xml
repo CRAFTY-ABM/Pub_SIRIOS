@@ -3,7 +3,7 @@
 		label="C_Cereal" serialID="0"
 		givingUpMean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_C_Cereal.csv, givingUp)}"
 		givingInMean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_C_Cereal.csv, givingIn)}"
-		givingUpProbability = "${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_VLI_Livestock.csv, givingUpProb)}">
+		givingUpProbability = "${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_C_Cereal.csv, givingUpProb)}">
 	
 		
  		<givingUpDistribution class="com.moseph.modelutils.distribution.NormalDistribution" 
@@ -26,7 +26,7 @@
 		label="NC_Cereal" serialID="1"
 		givingUpMean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_NC_Cereal.csv, givingUp)}"
 		givingInMean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_NC_Cereal.csv, givingIn)}"
-		givingUpProbability = "${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_VLI_Livestock.csv, givingUpProb)}">
+		givingUpProbability = "${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_NC_Cereal.csv, givingUpProb)}">
 		
  		<givingUpDistribution class="com.moseph.modelutils.distribution.NormalDistribution" 
  			mean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_NC_Cereal.csv, givingUpDistributionMean)}" 
@@ -49,7 +49,7 @@
 		label="C_Livestock" serialID="2"
 		givingUpMean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_C_Livestock.csv, givingUp)}"
 		givingInMean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_C_Livestock.csv, givingIn)}"
-		givingUpProbability = "${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_VLI_Livestock.csv, givingUpProb)}">
+		givingUpProbability = "${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_C_Livestock.csv, givingUpProb)}">
 		
  		<givingUpDistribution class="com.moseph.modelutils.distribution.NormalDistribution" 
  			mean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_C_Livestock.csv, givingUpDistributionMean)}" 
@@ -71,7 +71,7 @@
 		label="NC_Livestock" serialID="3"
 		givingUpMean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_NC_Livestock.csv, givingUp)}"
 		givingInMean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_NC_Livestock.csv, givingIn)}"
-		givingUpProbability = "${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_VLI_Livestock.csv, givingUpProb)}">
+		givingUpProbability = "${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_NC_Livestock.csv, givingUpProb)}">
 		
  		<givingUpDistribution class="com.moseph.modelutils.distribution.NormalDistribution" 
  			mean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_NC_Livestock.csv, givingUpDistributionMean)}" 
@@ -94,7 +94,7 @@
 		label="Forester" serialID="4"
 		givingUpMean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_Forester.csv, givingUp)}"
 		givingInMean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_Forester.csv, givingIn)}"
-		givingUpProbability = "${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_VLI_Livestock.csv, givingUpProb)}">
+		givingUpProbability = "${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_Forester.csv, givingUpProb)}">
 		
  		<givingUpDistribution class="com.moseph.modelutils.distribution.NormalDistribution" 
  			mean="${@(Runs.csv ~ @@(worlds/EU28; AftParamFolder)/AftParams_Forester.csv, givingUpDistributionMean)}" 

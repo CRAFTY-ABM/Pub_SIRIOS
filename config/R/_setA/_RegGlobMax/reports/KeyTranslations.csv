@@ -1,5 +1,5 @@
 ConsConnectivity,Connectivity of ext. land uses,yellow
-ConsConnectivity_NC_Cereal-NC_Livestock,Connectivity of ext. land uses,
+ConsConnectivity_NC_Cereal-NC_Livestock,Connectivity of ext. land uses,yellow
 ConsPatches_NC,Number of ext. managed patches,
 ConsPatches_NC_Cereal-NC_Livestock,Number of ext. managed patches,
 ConsProp_NC,Proportion of ext. managed cells,
@@ -22,7 +22,7 @@ SupplyPercent_Timber,Demand-supply gap (Timber),
 MaxUnderSupply,Maximum undersupply (% demand),
 MaxUnderSupply_Cereal-Meat-Timber,Maximum undersupply (% demand),
 MaxOverSupply,Maximum oversupply (% demand),red
-MaxOverSupply_Cereal-Meat-Timber,Maximum oversupply (% demand),
+MaxOverSupply_Cereal-Meat-Timber,Maximum oversupply (% demand),red
 OverSupply_Cereal,Mean oversupply (% demand cereal),
 OverSupplyPercent_Cereal,Mean oversupply (% demand cereal),
 OverSupply_Meat,Mean oversupply (% demand meat),

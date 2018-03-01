@@ -241,7 +241,7 @@ for (seed in preserve$seeds) {
 	visualise_actions(simp, 
 			actiondata		= dataActionsComp,
 			monitordata 	= monitordata,
-			onlyselected 	= TRUE,
+			onlyselected 	= FALSE,
 			y_column_measure = "Value",
 			colour_column 	= "Service",
 			size_column 	= NULL,

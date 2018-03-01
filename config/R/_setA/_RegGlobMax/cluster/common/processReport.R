@@ -1,4 +1,4 @@
-#######################################################################
+	#######################################################################
 # ApplicationScript for Creating PDF Reports of CRAFTY ouptut
 #
 # Project:		CRAFTY_NetSens
@@ -27,10 +27,9 @@ opt	<- optparse::parse_args(optparse::OptionParser(option_list=option_list))
 # Usually also in simp.R, but required here to find simp.R
 simp$sim$folder 	<- "_setA/_RegGlobMax"	
 
-simp$sim$task		<- paste(opt$run, opt$seed, sep="-") # Name of surounding folder, usually a description of task 
+simp$sim$task		<- paste(opt$firstrun, opt$seedoffset, sep="-") # Name of surounding folder, usually a description of task 
 
 preserve <- list()
-preserve$task 		<- simp$sim$task
 
 # simp$dirs$simp is set by maschine-specific file:
 setwd(paste(simp$dirs$simp, simp$sim$folder, "cluster/common", sep="/"))
@@ -43,10 +42,11 @@ runs = as.numeric(opt$firstrun):(as.numeric(opt$numrun)-1)
 rseeds = as.numeric(opt$seedoffset):(as.numeric(opt$seedoffset) + as.numeric(opt$numrandomseeds) - 1)
 for (run in runs) {
 	for (rseed in rseeds) {
-		# run = 61; rseed = 0
+		# run = 310; rseed = 10
 		
 		preserve$run = run
 		preserve$seed = rseed
+		preserve$task = paste(preserve$run, preserve$seed, sep="-") 
 		
 		
 		simp$sim$scenario				<- "A1"

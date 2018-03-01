@@ -3,6 +3,6 @@
 						id="GlobalSubsidisingInst">
 		<btLabel>CognitiveGlobalInst</btLabel>
 		<actionRuntime>${@(Runs.csv, GlobalInstActionRT)}</actionRuntime>
-		<tickChecker class="org.volante.abm.institutions.global.GlobalSubsidisingInstitution$OddTickChecker"/>
+		<tickChecker class="org.volante.abm.institutions.global.TickChecker$OddTickChecker"/>
 	</globalInstitution>
 </globalInstitutions>

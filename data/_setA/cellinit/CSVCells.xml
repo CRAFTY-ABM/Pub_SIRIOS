@@ -2,5 +2,8 @@
 	<xColumn>x</xColumn>
 	<yColumn>y</yColumn>
 	<unmanagedIdentifier>UNMANAGED</unmanagedIdentifier>
+	<agentAssembler class="org.volante.abm.agent.assembler.DefaultSocialAgentAssembler">
+		<defaultBtId>3</defaultBtId>
+	</agentAssembler>
 	<csvFile>${@@(../worlds/%w/regionalisations/%k/capitals; CapitalFolder)/%r_Capitals.csv}</csvFile>
 </cellInitialiser>

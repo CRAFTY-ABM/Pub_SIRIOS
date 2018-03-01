@@ -9,10 +9,9 @@ simp$sim$folder 	<- "_setA/_RegGlobMax"
 setwd(paste(simp$dirs$simp, sep="/"))
 source(paste(simp$dirs$simp, simp$sim$folder, "simp.R", sep="/"))
 
-simp$sim$runids 	<- c(paste(preserve$run, "-0", sep=""))	# run to deal with
-simp$sim$id			<- c(paste(preserve$run, "-0", sep=""))	# ID to identify specific data collections (e.g. regions)
-simp$sim$task		<- c(paste(preserve$run, "-0", sep=""))	# Name of surrounding folder, usually a description of task 
-simp$sim$endtick	<- 2020
+simp$sim$runids 	<- c(paste(preserve$run, "-", preserve$seed, sep=""))	# run to deal with
+simp$sim$id			<- c(paste(preserve$run, "-", preserve$seed, sep=""))	# ID to identify specific data collections (e.g. regions)
+simp$sim$task		<- c(paste(preserve$run, "-", preserve$seed, sep=""))	# Name of surrounding folder, usually a description of task 
 
 simp$fig$init <- function(simp, outdir, filename) {}
 simp$fig$close<- function() {}
@@ -152,12 +151,12 @@ hl_aggregate_aftcompetitiveness(simp, dataname = "dataAggregateAFTCompetitivenes
 \newpage
 \subsubsection{Pre-Allocation Competitiveness Distributions: Overview}
 \label{preAllocCompetitivenessLines}
-<<preAllocCompetitiveness, fig.height=4, fig.cap = "Pre-Allocation Competitiveness">>=
+<<preAllocCompetitiveness, fig.cap = "Pre-Allocation Competitiveness">>=
 hl_competitiveness_prealloc(simp, dataname = "csv_preAllocTable", 
 	maxcompetitiveness = "90%", numbins = 15)
 @
 
-\subsection{Pre-Allocation Competitiveness Distributions}
+\subsubsection{Pre-Allocation Competitiveness Distributions}
 <<compdist>>=
 hl_competitiveness_preallocPerAft(simp, dataname = "csv_preAllocTable",  facet_ncol = 4,
 		maxcompetitiveness = "100%", numbins = 40, title = "Pre-Allocation Competitiveness", 
