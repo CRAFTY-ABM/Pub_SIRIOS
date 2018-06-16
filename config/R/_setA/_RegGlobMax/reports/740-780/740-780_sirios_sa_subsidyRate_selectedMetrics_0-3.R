@@ -187,20 +187,21 @@ data_selected$Facet <- paste("Normalised Set", metrics[match(data_selected$Metri
 metriclabels <-  read.csv(file="../../reports/KeyTranslations_SA_TriggeringWoFacet.csv", header=FALSE, stringsAsFactors = FALSE)
 metriclabels <- setNames(paste("(",metrics[match(metriclabels[,1], metrics[,2]),1], ") ", metriclabels[,2], sep=""), metriclabels[,1])
 
-colours <- c(RColorBrewer::brewer.pal(length(set1metrics), "Set1"),
-		RColorBrewer::brewer.pal(length(set2metrics), "Set1"))
+colours <- c(RColorBrewer::brewer.pal(length(set1metrics), "Dark2"),
+		RColorBrewer::brewer.pal(length(set2metrics), "Dark2"))
 
-colours <- setNames(colours, c(set1metrics, set2metrics))
+colours <- setNames(colours, c(sort(set1metrics), sort(set2metrics)))
 
 data_selected$Metric <- factor(data_selected$Metric, levels = metrics[order(paste(metrics[,1], metrics[,2])),2])
 
 data_selected <- data_selected[order(paste(data_selected$Facet, data_selected$Metric)),]
 visualise_lines(simp, data_selected, x_column = "SubsidyRate", y_column="Value", title = NULL,
 		colour_column = "Metric", colour_legendtitle = "Metric", colour_legenditemnames = NULL,
-		facet_column = "Facet", facet_ncol = 1, filename = paste("SA_SelectedMetrics_0-3", setsimp$sim$id, 
+		facet_column = "Facet", facet_ncol = 1, filename = paste("SA_SelectedMetrics_R2", setsimp$sim$id, 
 				setsimp$sim$id, sep="_"),
 		alpha = simp$fig$alpha, ggplotaddons = list(
 				ggplot2::xlab("Subsidy Rate in % of average benefit"),
+				ggplot2::ylab("Fraction of initial value"),
 				ggplot2::guides(fill=FALSE),
 				ggplot2::scale_fill_manual(values=colours),
 				ggplot2::scale_color_manual(values=colours, labels=metriclabels, guide=ggplot2::guide_legend(ncol=2)),

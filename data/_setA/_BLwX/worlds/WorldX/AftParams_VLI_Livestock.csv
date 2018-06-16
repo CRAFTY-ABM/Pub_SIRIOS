@@ -1,0 +1,9 @@
+"aftParamId","givingIn","givingInDistributionMean","givingInDistributionSD","givingUp","givingUpDistributionMean","givingUpDistributionSD","serviceLevelNoiseMin","serviceLevelNoiseMax","productionCsvFile","givingUpProb"
+0,10,10,0.3,0,0,0.3,0,0.1,"/production/VLI_Livestock/AftProduction_VLI_Livestock_mono_medium.csv",0.2
+1,10,10,0.3,0,0,0.3,0,0.1,"/production/VLI_Livestock/AftProduction_VLI_Livestock_mono_medium.csv",0.2
+2,10,10,0.3,0,0,0.3,0,0.1,"/production/VLI_Livestock/AftProduction_VLI_Livestock_mono_medium.csv",0.2
+3,10,10,0.3,0,0,0.3,0,0.1,"/production/VLI_Livestock/AftProduction_VLI_Livestock_mono_medium.csv",0.2
+4,10,10,0.3,0,0,0.3,0,0.1,"/production/VLI_Livestock/AftProduction_VLI_Livestock_mono_medium.csv",0.1
+5,10,10,0.3,0,0,0.3,0,0.1,"/production/VLI_Livestock/AftProduction_VLI_Livestock_mono_medium.csv",0.1
+6,10,10,0.3,0,0,0.3,0,0.1,"/production/VLI_Livestock/AftProduction_VLI_Livestock_mono_medium.csv",0.1
+7,10,10,0.3,0,0,0.3,0,0.1,"/production/VLI_Livestock/AftProduction_VLI_Livestock_mono_medium.csv",0.1

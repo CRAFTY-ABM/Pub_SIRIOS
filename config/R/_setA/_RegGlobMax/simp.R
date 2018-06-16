@@ -38,6 +38,7 @@ simp$fig$splitfigs		<- FALSE
 simp$fig$facetlabelsize <- 14
 simp$fig$maptitle		<- "WorldX-AFTs"
 
+
 ### Batch Run Creation Settings #################################################
 simp$batchcreation$pathToData				<- "../.."
 simp$batchcreation$scenarios				<- c("B1")

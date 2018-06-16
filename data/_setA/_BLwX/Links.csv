@@ -1,0 +1,10 @@
+DefaultPath,ID,Value
+../worlds/EU28/regionalisations/26.csv,RegionCsvFile,"@(Runs.csv, RegionCsvFile)"
+../demand/Demand.xml,DemandXML,demand/Demand.xml
+../worlds/%w/regionalisations/%k/%s,DemandFolder,../worlds/%w/regionalisations/%k/%s
+../cellInitialiser/CellInitialiser.xml,CellInitialiserXML,../cellinit/CSVCells.xml
+../worlds/%w/regionalisations/%k/capitals,CapitalFolder,../worlds/WorldX/regionalisations/3/capitals
+worlds/EU28,AftParamFolder,worlds/WorldX
+../worlds/EU28/regionalisations/26/socialNetworks,SocialNetworkXMLFolder,../worlds/WorldX/regionalisations/3/socialNetworks/0
+../worlds/EU28/socialNetworks/SocialNetworkABTParameter_Hdff.csv,SocialNetworkABTParameterHDFF,../socialNetworks/SocialNetworkABTParameter_Hdff.csv
+../worlds/EU28/socialNetworks/SocialNetworkABTLinksParameter.csv,SocialNetworkABTLinksParameter,../socialNetworks/SocialNetworkABTLinksParameterCombined.csv

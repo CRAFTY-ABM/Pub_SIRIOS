@@ -3,7 +3,7 @@ ConsConnectivity_NC_Cereal-NC_Livestock,Connectivity of ext. land uses,
 ConsPatches_NC,Number of ext. managed patches,
 ConsPatches_NC_Cereal-NC_Livestock,Number of ext. managed patches,
 ConsProp_NC,Proportion of ext. managed cells,
-DivLuPerRegSimpson,Regional LU diversity (Simpson),
+DivLuPerRegSimpson,Regional land use diversity (Simpson),
 DivSupplyAcrossRegSimpson,Supply consistency across regions (Simpson),
 DivSupplyPerRegSimpson,Regional supply diversity (Simpson),
 EffSupply,Service delivery efficiency,
@@ -11,7 +11,7 @@ SupplyMaxGap,Maximum demand-supply gap,
 SupplyPercent_Cereal,Demand-supply gap (Cereal),
 SupplyPercent_Meat,Demand-supply gap (Meat),
 VarChangesCells,Number of changed cells,
-VarChangesLu,Number of LU changes,blue
+VarChangesLu,Number of land use changes,lightblue
 DivLuShannon,Shannon Diversity Index,
 ConsPatches_C,Number of int. managed patches,
 ConsPatches_C_Cereal-C_Livestock,Number of int. managed patches,
@@ -20,26 +20,26 @@ SupplyPercent_Total,Demand-supply gap (total),
 SupplyPercent_Timber,Demand-supply gap (Timber),
 MaxSupplyPercentUnder,Maximum Undersupply (% demand),
 MaxSupplyPercentUnder_Cereal-Meat-Timber,Maximum Undersupply (% demand),
-MaxSupplyPercentOver,Maximum Oversupply (% demand),red
+MaxSupplyPercentOver,Maximum Oversupply (% demand),lightred
 MaxSupplyPercentOver_Cereal-Meat-Timber,Maximum Oversupply (% demand),
 SupplyPercentOver_Cereal,Mean Oversupply (% demand cereal),
 SupplyPercentOverPercent_Cereal,Mean Oversupply (% demand cereal),
 SupplyPercentOver_Meat,Mean Oversupply (% demand meat),
 SupplyPercentOverPercent_Meat,Mean Oversupply (% demand meat),
-SupplyPercentOver_Total,Mean Oversupply (% demand total),green
-SupplyPercentOverPercent_Total,Mean Oversupply (% demand total),green
+SupplyPercentOver_Total,Mean Oversupply (% demand total),yellow
+SupplyPercentOverPercent_Total,Mean Oversupply (% demand total),yellow
 SupplyPercentOver_Timber,Mean Oversupply (% demand timber),
 SupplyPercentOverPercent_Timber,Mean Oversupply (% demand timber),
 SupplyPercentUnder_Cereal,Mean Undersupply (% demand cereal),
 SupplyPercentUnderPercent_Cereal,Mean Undersupply (% demand cereal),
 SupplyPercentUnder_Meat,Mean Undersupply (% demand meat),
 SupplyPercentUnderPercent_Meat,Mean Undersupply (% demand meat),
-SupplyPercentUnder_Total,Mean Undersupply (% demand total),red
-SupplyPercentUnderPercent_Total,Mean Undersupply (% demand total),red
+SupplyPercentUnder_Total,Mean Undersupply (% demand total),lightred
+SupplyPercentUnderPercent_Total,Mean Undersupply (% demand total),lightred
 SupplyPercentUnder_Timber,Mean Undersupply (% demand timber),
 SupplyPercentUnderPercent_Timber,Mean Undersupply (% demand timber),
 NumActions,Number of performed actions,
-NumActionsNC,Number of performed ext. LU targeted actions,
+NumActionsNC,Number of performed ext. land use targeted actions,
 RegSupplyPercentUnder_Cereal,Mean reg. Undersupply (% demand cereal),
 RegSupplyPercentUnderPercental_Cereal,Mean reg. Undersupply (% demand cereal),
 RegSupplyPercentUnder_Meat,Mean reg. Undersupply (% demand meat),

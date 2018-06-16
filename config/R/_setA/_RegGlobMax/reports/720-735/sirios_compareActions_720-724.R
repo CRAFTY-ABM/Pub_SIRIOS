@@ -4,7 +4,7 @@
 # Project:		Pub_SIRIOS
 # Last update: 	10/12/2017
 # Author: 		Sascha Holzhauer
-# Instructions:	Run maschine-specific SIMP file first (see craftyr documentation)
+# Instructions:	Run machine-specific SIMP file first (see craftyr documentation)
 ##########################################################################################
 
 source(simp$simpDefinition)
@@ -30,7 +30,9 @@ monitoredServices 	<- c("Cereal", "Meat", "Timber")
 regionConversion = c("DE13" = "Region A", "DE14" = "Region B", "Global" = "Global") #  "DE27" = "Region C",
 runIdDescriptions	<- c("720-1" = "Short Action Runtime", "724-1" =  "Long Action Runtime")
 
-prefixes <- c("RegionalCompFuncSubsidyPa", "GlobalCompFuncSubsidyPa")
+#prefixes <- c("RegionalCompFuncSubsidyPa", "GlobalCompFuncSubsidyPa")
+prefixes <- c("CompFuncSubsidyPa")
+
 aftcolors <- setNames(simp$colours$AFT,
 		simp$mdata$aftNames[match(names(simp$colours$AFT), names(simp$mdata$aftNames))]) 
 aftcolors <- aftcolors[!is.na(names(aftcolors))]
@@ -38,10 +40,10 @@ actionfillcolours <- setNames(rep(aftcolors, times=length(prefixes)),
 		paste(rep(prefixes, each=length(aftcolors)), gsub("_", "",names(aftcolors)), sep="_"))
 
 customiseActionNames <- function(names) {
-	names <- gsub("GlobalCompFuncSubsidyPa", "Global Subsidy:", names)
-	names <- gsub("RegionalCompFuncSubsidyPa", "Regional subsidy:", names)
-	names <- gsub("_C", " int. ", names)
-	names <- gsub("_NC", " ext. ", names)
+	names <- gsub("CompFuncSubsidyPa", "Subsidy:", names)
+	#names <- gsub("RegionalCompFuncSubsidyPa", "Regional subsidy:", names)
+	names <- gsub("_C", " intensive ", names)
+	names <- gsub("_NC", " extensive ", names)
 	names <- gsub("DoNothing", "Do nothing", names)
 	names <- gsub("_", " ", names)
 	return(names)
@@ -89,7 +91,7 @@ customiseMonitorData <- function(monitordata) {
 
 simp$fig$height <- 700
 simp$fig$width <- 1000
-filenameprefix <-  "InstitutionalActionMetrics_ThresholdSubsidy_Pub"
+filenameprefix <-  "InstitutionalActionMetrics_ThresholdSubsidy_Pub-R2"
 
 ############### END of Parameter Section ######################
 
@@ -112,7 +114,7 @@ for (seed in preserve$seeds) {
 	
 	simp$sim$endtick	<- 2040
 	simp$sim$runids		<- paste(preserve$run, "-", preserve$seed, sep="")
-	simp$sim$id		<- simp$sim$runids
+	simp$sim$id			<- simp$sim$runids
 	
 	#####
 	#####
@@ -180,7 +182,7 @@ for (seed in preserve$seeds) {
 			metricdata = data_metrics[data_metrics$Metric == metric2show,]
 			colnames(metricdata)[colnames(metricdata)=="Metric"] <- "Mode"
 			metricdata$Value <- metricdata$Value /
-					metricdata[metricdata$Tick == min(metricdata$Tick, na.rm=T), "Value"]
+					metricdata[metricdata$Tick == min(metricdata$Tick, na.rm=T), "Value"] * 100
 			if(nrow(metricdata) > 0) {
 				metricdata$Region <- "Global"
 				metricdata$Service <- metriclabels[metric2show]
@@ -205,7 +207,7 @@ for (seed in preserve$seeds) {
 					"ID"] <- "Runid"
 	dataSupplyComp$Facet <- paste("Supply-demand gap")
 	dataSupplyComp$Mode <- "PERCEIVED"
-
+	dataSupplyComp$Value <- dataSupplyComp$Value-100 
 	
 	## Add perceived Gap:
 	if (addPerceivedGap) {
@@ -228,14 +230,20 @@ for (seed in preserve$seeds) {
 	if (!is.null(runIdDescriptions)) {
 		levels(dataActionsComp$Runid) <- runIdDescriptions[levels(dataActionsComp$Runid)]
 		levels(monitordata$Runid) <- runIdDescriptions[levels(monitordata$Runid)]
+		dataActionsComp$Runid <- factor(dataActionsComp$Runid, levels=runIdDescriptions)
+		monitordata$Runid <- factor(monitordata$Runid, levels = runIdDescriptions)
 	}
+	
+	dataActionsComp$Action <- gsub("Global", "", dataActionsComp$Action)
+	dataActionsComp$Action <- gsub("Regional", "", dataActionsComp$Action)
+	dataActionsComp$Action <- factor(dataActionsComp$Action)
 	
 	# customise action labels
 	actionLabels <- setNames(unique(dataActionsComp$Action), unique(dataActionsComp$Action))
 	if (exists("customiseActionNames")) actionLabels <- customiseActionNames(actionLabels)
 	names(actionLabels) <- unique(dataActionsComp$Action)
 	
-	dataActionsComp$Facet <- as.factor("Actions")
+	dataActionsComp$Facet <- as.factor("Action scores")
 	monitordata <- monitordata[monitordata$Service %in% c(monitoredServices, metriclabels),]
 		
 	dataActionsComp$Region <- levels(dataActionsComp$Region)[dataActionsComp$Region]
@@ -254,14 +262,16 @@ for (seed in preserve$seeds) {
 	actfillcolours 	= c("DoNothing" = "grey", actionfillcolours)
 	actfillcolours <- actfillcolours[order(names(actfillcolours))]
 	
-	actfillcolours <- setNames(actfillcolours, levels(dataActionsComp$Action[!is.na(dataActionsComp$Action)]))
-	actfillcolours <- actfillcolours[1:length(levels(dataActionsComp$Action[!is.na(dataActionsComp$Action)]))]
+	# TODO
+	
+	#actfillcolours <- setNames(actfillcolours, levels(dataActionsComp$Action[!is.na(dataActionsComp$Action)]))
+	#actfillcolours <- actfillcolours[1:length(levels(dataActionsComp$Action[!is.na(dataActionsComp$Action)]))]
 
 	actiondata <- dataActionsComp[dataActionsComp$Selected == 1,]
 	actfillcolours <- actfillcolours[names(actfillcolours) %in% unique(actiondata$Action[!is.na(actiondata$Action)])]
 
 	visualise_actions(simp, 
-			actiondata	= dataActionsComp,
+			actiondata		= dataActionsComp,
 			monitordata 	= monitordata,
 			onlyselected 	= TRUE,
 			y_column_measure = "Value",
@@ -280,14 +290,18 @@ for (seed in preserve$seeds) {
 					ggplot2::facet_grid(as.formula("Facet ~ Runid"), scales="free_y"),
 					ggplot2::scale_fill_manual(name= "Action", values = actfillcolours, labels = actionLabels, na.translate = FALSE),
 					ggplot2::scale_x_continuous(breaks= scales::pretty_breaks(n = 3)),
-					ggplot2::guides(shape = ggplot2::guide_legend(order = 1),
+					ggplot2::guides(shape = ggplot2::guide_legend("Institution type", order = 1),
 									linetype = ggplot2::guide_legend(order = 2),
 									fill = ggplot2::guide_legend(order = 3, override.aes=list(colour=actfillcolours)),
 									colour=ggplot2::guide_legend("Metric/Service", order = 4)),
 					ggplot2::theme(legend.key.size=grid::unit(0.8, "lines"),
 							axis.text=ggplot2::element_text(size=ggplot2::rel(0.6)))
 					,ggplot2::geom_point(data = maxsupplydata, ggplot2::aes_string(x="Tick", y="Value"), 
-							colour=metriccolours[maxsupplydata$Mode], alpha=0.2)
+							colour=metriccolours[maxsupplydata$Mode], alpha=0.2),
+							ggplot2::theme(legend.key.size = grid::unit(4, "mm"), 
+									legend.spacing.y = grid::unit(0.1, "cm"),
+									legend.box.spacing = grid::unit(0.4, "cm")),
+							ggplot2::labs(y="Values")
 		)
 	)
 }
