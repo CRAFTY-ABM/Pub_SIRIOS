@@ -20,7 +20,7 @@ setsimp$sim$id <- "set720-735"
 preserve <- list()
 preserve$task 		<- simp$sim$task
 
-nointeractioneffects <-  FALSE
+nointeractioneffects <-  TRUE #FALSE
 
 # simp$dirs$simp is set by maschine-specific file:
 setwd(paste(simp$dirs$simp, simp$sim$folder, "cluster/common", sep="/"))
@@ -91,7 +91,7 @@ metricColnamesFocus = c("VarChangesLu", "VarChangesCells",
 		#"DivLuPerRegSimpson", "DivSupplyPerRegSimpson")
 			# "UnderSupply_Cereal", "UnderSupply_Timber","UnderSupply_Meat", "NumActionsNC",
 		)
-paramcolnames = c("TriggerThreshold", "SubsidyRate", "ActionLifetime", "Precedence")
+paramcolnames = c("TriggeringThreshold", "SubsidyRate", "ActionLifetime", "Precedence")
 
 substitServices <- c("I" = 1, "J" = 2)
 substitPresedence <- c("B" = 1, "C" = 2)
@@ -168,6 +168,8 @@ data <- shbasic::sh_tools_loadorsave(SIP = setsimp, OBJECTNAME = "data_metrics",
 	return(data)
 })
 
+colnames(data)[match("TriggerThreshold", colnames(data))] <- "TriggeringThreshold"
+
 # Substitute letters by numbers:
 data$Services <- substitServices[data$Services]
 data$Precedence <- substitPresedence[data$Precedence]
@@ -176,7 +178,7 @@ data$Precedence <- substitPresedence[data$Precedence]
 dexp <- shdoe::shdoe_param_getDefaultDexp()
 
 
-metriclabels <-  read.csv(file="../../reports/KeyTranslations.csv", header=FALSE, stringsAsFactors = FALSE)
+metriclabels <-  read.csv(file="../../reports/KeyTranslations2.csv", header=FALSE, stringsAsFactors = FALSE)
 metriclabels <- setNames(metriclabels[,2], metriclabels[,1])
 
 
@@ -214,12 +216,12 @@ for (set in unique(metrics[,1])) {
 		substitutions <- c(substitutions, "Effect" = "Effect")
 		simp$fig$height			<- 920
 		simp$fig$width			<- 920
-		filename 				<-  paste("crafty_netsens_analysis_doe_effects_720-735_selectedMetrics_nointeraction", set, sep="_")
+		filename 				<-  paste("crafty_netsens_analysis_doe_effects_720-735_selectedMetrics_nointeraction_R2", set, sep="_")
 		numcol					<- 2
 	} else {
 		indices <- rep(TRUE, length(rownames(fx)))
 		effectdata <- setNames(fx$effects, rownames(fx))
-		filename 				<-  paste("crafty_netsens_analysis_doe_effects_720-735_selectedMetrics", set, sep="_")
+		filename 				<-  paste("crafty_netsens_analysis_doe_effects_720-735_selectedMetrics_R2", set, sep="_")
 		numcol					<-  3
 	}
 	

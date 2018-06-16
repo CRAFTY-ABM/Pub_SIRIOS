@@ -117,7 +117,11 @@ colnames(data) <- c("Parameter", set[1], set[2], set[3], set[4])
 
 # create figure:
 simp$fig$init(simp, outdir = paste(simp$dirs$output$figures, "lines", sep="/"), 
-		filename = paste("ResilienceParams_720-735_A4", sep="_"))
+		filename = paste("ResilienceParams_720-735_A4_R2", sep="_"))
+
+levels(data$Parameter)[match("TriggerThreshold", levels(data$Parameter))] <- "TriggeringThreshold"
+levels(data$Parameter)[match("- TriggerThreshold", levels(data$Parameter))] <- "- TriggeringThreshold"
+levels(data$Parameter)[match("TriggerThreshold:SubsidyRate", levels(data$Parameter))] <- "TriggeringThreshold:SubsidyRate"
 
 g <- ggplot2::ggplot(data, ggplot2::aes_string(set[3], set[4])) +
 		ggplot2::theme(legend.text=ggplot2::element_text(size=12)) + 
